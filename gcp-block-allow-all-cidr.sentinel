@@ -1,0 +1,19 @@
+
+import "tfplan/v2" as tfplan
+
+gcp_subnets = filter tfplan.resource_changes as _, rc {
+    rc.type is "google_compute_firewall" and
+        (rc.change.actions contains "create" or rc.change.actions is ["update"])
+}
+
+disallowed_cidr_block = "0.0.0.0/0"
+
+block_allow_all = rule {
+	all get_resources("google_compute_firewall") as fw {
+		disallowed_cidr_block not in fw.applied.source_ranges[0]
+	}
+}
+
+main = rule {
+	(block_allow_all) else true
+}
