@@ -1,7 +1,7 @@
 module "firewall-allow-ssh" {
   source            = "./modules/compute_firewall"
   fw_name           = "fw-allow-ssh-linux"
-  network_self_link = "${module.network.self_link}"
+  network_self_link = module.network.self_link
   project_id        = var.project_id
   protocol          = "tcp"
   ports             = ["22"]
@@ -11,13 +11,13 @@ module "firewall-allow-ssh" {
 
 output "fw-allow-ssh_self_link" {
   description = "The URI of the created resource"
-  value       = "${module.firewall-allow-ssh.self_link}"
+  value       = module.firewall-allow-ssh.self_link
 }
 
 module "firewall-allow-rdp" {
   source            = "./modules/compute_firewall"
   fw_name           = "fw-allow-rdp-windows"
-  network_self_link = "${module.network.self_link}"
+  network_self_link = module.network.self_link
   project_id        = var.project_id
   protocol          = "tcp"
   ports             = ["3389"]
@@ -27,13 +27,13 @@ module "firewall-allow-rdp" {
 
 output "fw-allow-rdp_self_link" {
   description = "The URI of the created resource"
-  value       = "${module.firewall-allow-rdp.self_link}"
+  value       = module.firewall-allow-rdp.self_link
 }
 
 module "firewall-allow-icmp" {
   source            = "./modules/compute_firewall"
   fw_name           = "fw-allow-icmp"
-  network_self_link = "${module.network.self_link}"
+  network_self_link = module.network.self_link
   project_id        = var.project_id
   protocol          = "icmp"
   source_ranges     = ["10.0.0.0/8"]
@@ -41,7 +41,7 @@ module "firewall-allow-icmp" {
 
 output "fw-allow-icmp_self_link" {
   description = "The URI of the created resource"
-  value       = "${module.firewall-allow-icmp.self_link}"
+  value       = module.firewall-allow-icmp.self_link
 }
 
 
