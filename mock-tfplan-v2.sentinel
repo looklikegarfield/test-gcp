@@ -1,0 +1,2035 @@
+terraform_version = "1.0.7"
+
+planned_values = {
+	"outputs": {
+		"fw-allow-icmp_self_link": {
+			"name":      "fw-allow-icmp_self_link",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"fw-allow-rdp_self_link": {
+			"name":      "fw-allow-rdp_self_link",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"fw-allow-ssh_self_link": {
+			"name":      "fw-allow-ssh_self_link",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"network_name": {
+			"name":      "network_name",
+			"sensitive": false,
+			"value":     "vpc-shared-dev-01",
+		},
+		"network_self_link": {
+			"name":      "network_self_link",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"subnet_usw2_gateway_address": {
+			"name":      "subnet_usw2_gateway_address",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"subnet_usw2_self_link": {
+			"name":      "subnet_usw2_self_link",
+			"sensitive": false,
+			"value":     undefined,
+		},
+		"subnet_usw2_subnet_region": {
+			"name":      "subnet_usw2_subnet_region",
+			"sensitive": false,
+			"value":     "us-west2",
+		},
+	},
+	"resources": {
+		"module.firewall-allow-icmp.google_compute_firewall.firewall": {
+			"address":        "module.firewall-allow-icmp.google_compute_firewall.firewall",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-icmp",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_firewall",
+			"values": {
+				"allow": [
+					{
+						"ports":    [],
+						"protocol": "icmp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-icmp",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags":             null,
+				"timeouts":                null,
+			},
+		},
+		"module.firewall-allow-rdp.google_compute_firewall.firewall": {
+			"address":        "module.firewall-allow-rdp.google_compute_firewall.firewall",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-rdp",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_firewall",
+			"values": {
+				"allow": [
+					{
+						"ports": [
+							"3389",
+						],
+						"protocol": "tcp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-rdp-windows",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags": [
+					"windows",
+				],
+				"timeouts": null,
+			},
+		},
+		"module.firewall-allow-ssh.google_compute_firewall.firewall": {
+			"address":        "module.firewall-allow-ssh.google_compute_firewall.firewall",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-ssh",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_firewall",
+			"values": {
+				"allow": [
+					{
+						"ports": [
+							"22",
+						],
+						"protocol": "tcp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-ssh-linux",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags": [
+					"linux",
+				],
+				"timeouts": null,
+			},
+		},
+		"module.network.google_compute_network.vpc": {
+			"address":        "module.network.google_compute_network.vpc",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.network",
+			"name":           "vpc",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_network",
+			"values": {
+				"auto_create_subnetworks":         false,
+				"delete_default_routes_on_create": false,
+				"description":                     null,
+				"name":                            "vpc-shared-dev-01",
+				"project":                         "REDACTED_SENSITIVE",
+				"routing_mode":                    "REGIONAL",
+				"timeouts":                        null,
+			},
+		},
+		"module.subnet_usw2.google_compute_subnetwork.subnet": {
+			"address":        "module.subnet_usw2.google_compute_subnetwork.subnet",
+			"depends_on":     [],
+			"deposed_key":    "",
+			"index":          null,
+			"mode":           "managed",
+			"module_address": "module.subnet_usw2",
+			"name":           "subnet",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"tainted":        false,
+			"type":           "google_compute_subnetwork",
+			"values": {
+				"description":   null,
+				"ip_cidr_range": "10.10.8.0/24",
+				"log_config": [
+					{
+						"aggregation_interval": "INTERVAL_5_SEC",
+						"flow_sampling":        0.5,
+						"metadata":             "INCLUDE_ALL_METADATA",
+					},
+				],
+				"name": "sub-prv-usw2-01",
+				"private_ip_google_access": true,
+				"project":                  "REDACTED_SENSITIVE",
+				"region":                   "us-west2",
+				"timeouts":                 null,
+			},
+		},
+	},
+}
+
+variables = {
+	"IP_CIDR_Range_subnet_usw2": {
+		"name":  "IP_CIDR_Range_subnet_usw2",
+		"value": "10.10.8.0/24",
+	},
+	"NetworkName": {
+		"name":  "NetworkName",
+		"value": "vpc-shared-dev-01",
+	},
+	"SubnetName_usw2": {
+		"name":  "SubnetName_usw2",
+		"value": "sub-prv-usw2-01",
+	},
+	"SubnetRegion_usw2": {
+		"name":  "SubnetRegion_usw2",
+		"value": "us-west2",
+	},
+	"access_token": {
+		"name":  "access_token",
+		"value": "REDACTED_SENSITIVE",
+	},
+	"project_id": {
+		"name":  "project_id",
+		"value": "REDACTED_SENSITIVE",
+	},
+}
+
+resource_changes = {
+	"module.firewall-allow-icmp.google_compute_firewall.firewall": {
+		"address": "module.firewall-allow-icmp.google_compute_firewall.firewall",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"allow": [
+					{
+						"ports":    [],
+						"protocol": "icmp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-icmp",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags":             null,
+				"timeouts":                null,
+			},
+			"after_unknown": {
+				"allow": [
+					{
+						"ports": [],
+					},
+				],
+				"creation_timestamp": true,
+				"deny":               [],
+				"destination_ranges": true,
+				"direction":          true,
+				"id":                 true,
+				"network":            true,
+				"self_link":          true,
+				"source_ranges": [
+					false,
+				],
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.firewall-allow-icmp",
+		"name":           "firewall",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_firewall",
+	},
+	"module.firewall-allow-rdp.google_compute_firewall.firewall": {
+		"address": "module.firewall-allow-rdp.google_compute_firewall.firewall",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"allow": [
+					{
+						"ports": [
+							"3389",
+						],
+						"protocol": "tcp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-rdp-windows",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags": [
+					"windows",
+				],
+				"timeouts": null,
+			},
+			"after_unknown": {
+				"allow": [
+					{
+						"ports": [
+							false,
+						],
+					},
+				],
+				"creation_timestamp": true,
+				"deny":               [],
+				"destination_ranges": true,
+				"direction":          true,
+				"id":                 true,
+				"network":            true,
+				"self_link":          true,
+				"source_ranges": [
+					false,
+				],
+				"target_tags": [
+					false,
+				],
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.firewall-allow-rdp",
+		"name":           "firewall",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_firewall",
+	},
+	"module.firewall-allow-ssh.google_compute_firewall.firewall": {
+		"address": "module.firewall-allow-ssh.google_compute_firewall.firewall",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"allow": [
+					{
+						"ports": [
+							"22",
+						],
+						"protocol": "tcp",
+					},
+				],
+				"deny":           [],
+				"description":    null,
+				"disabled":       null,
+				"enable_logging": null,
+				"name":           "fw-allow-ssh-linux",
+				"priority":       1000,
+				"project":        "REDACTED_SENSITIVE",
+				"source_ranges": [
+					"10.0.0.0/8",
+				],
+				"source_service_accounts": null,
+				"source_tags":             null,
+				"target_service_accounts": null,
+				"target_tags": [
+					"linux",
+				],
+				"timeouts": null,
+			},
+			"after_unknown": {
+				"allow": [
+					{
+						"ports": [
+							false,
+						],
+					},
+				],
+				"creation_timestamp": true,
+				"deny":               [],
+				"destination_ranges": true,
+				"direction":          true,
+				"id":                 true,
+				"network":            true,
+				"self_link":          true,
+				"source_ranges": [
+					false,
+				],
+				"target_tags": [
+					false,
+				],
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.firewall-allow-ssh",
+		"name":           "firewall",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_firewall",
+	},
+	"module.network.google_compute_network.vpc": {
+		"address": "module.network.google_compute_network.vpc",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"auto_create_subnetworks":         false,
+				"delete_default_routes_on_create": false,
+				"description":                     null,
+				"name":                            "vpc-shared-dev-01",
+				"project":                         "REDACTED_SENSITIVE",
+				"routing_mode":                    "REGIONAL",
+				"timeouts":                        null,
+			},
+			"after_unknown": {
+				"gateway_ipv4": true,
+				"id":           true,
+				"ipv4_range":   true,
+				"self_link":    true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.network",
+		"name":           "vpc",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_network",
+	},
+	"module.subnet_usw2.google_compute_subnetwork.subnet": {
+		"address": "module.subnet_usw2.google_compute_subnetwork.subnet",
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after": {
+				"description":   null,
+				"ip_cidr_range": "10.10.8.0/24",
+				"log_config": [
+					{
+						"aggregation_interval": "INTERVAL_5_SEC",
+						"flow_sampling":        0.5,
+						"metadata":             "INCLUDE_ALL_METADATA",
+					},
+				],
+				"name": "sub-prv-usw2-01",
+				"private_ip_google_access": true,
+				"project":                  "REDACTED_SENSITIVE",
+				"region":                   "us-west2",
+				"timeouts":                 null,
+			},
+			"after_unknown": {
+				"creation_timestamp": true,
+				"enable_flow_logs":   true,
+				"fingerprint":        true,
+				"gateway_address":    true,
+				"id":                 true,
+				"log_config": [
+					{},
+				],
+				"network":            true,
+				"secondary_ip_range": true,
+				"self_link":          true,
+			},
+			"before": null,
+		},
+		"deposed":        "",
+		"index":          null,
+		"mode":           "managed",
+		"module_address": "module.subnet_usw2",
+		"name":           "subnet",
+		"provider_name":  "registry.terraform.io/hashicorp/google",
+		"type":           "google_compute_subnetwork",
+	},
+}
+
+output_changes = {
+	"fw-allow-icmp_self_link": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "fw-allow-icmp_self_link",
+	},
+	"fw-allow-rdp_self_link": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "fw-allow-rdp_self_link",
+	},
+	"fw-allow-ssh_self_link": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "fw-allow-ssh_self_link",
+	},
+	"network_name": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         "vpc-shared-dev-01",
+			"after_unknown": false,
+			"before":        null,
+		},
+		"name": "network_name",
+	},
+	"network_self_link": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "network_self_link",
+	},
+	"subnet_usw2_gateway_address": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "subnet_usw2_gateway_address",
+	},
+	"subnet_usw2_self_link": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         undefined,
+			"after_unknown": true,
+			"before":        null,
+		},
+		"name": "subnet_usw2_self_link",
+	},
+	"subnet_usw2_subnet_region": {
+		"change": {
+			"actions": [
+				"create",
+			],
+			"after":         "us-west2",
+			"after_unknown": false,
+			"before":        null,
+		},
+		"name": "subnet_usw2_subnet_region",
+	},
+}
+
+raw = {
+	"configuration": {
+		"provider_config": {
+			"google": {
+				"expressions": {
+					"access_token": {
+						"references": [
+							"var.access_token",
+						],
+					},
+					"project": {
+						"references": [
+							"var.project_id",
+						],
+					},
+					"region": {
+						"references": [
+							"var.SubnetRegion_usw2",
+						],
+					},
+				},
+				"name":               "google",
+				"version_constraint": "3.5.0",
+			},
+		},
+		"root_module": {
+			"module_calls": {
+				"firewall-allow-icmp": {
+					"expressions": {
+						"fw_name": {
+							"constant_value": "fw-allow-icmp",
+						},
+						"network_self_link": {
+							"references": [
+								"module.network.self_link",
+								"module.network",
+							],
+						},
+						"project_id": {
+							"references": [
+								"var.project_id",
+							],
+						},
+						"protocol": {
+							"constant_value": "icmp",
+						},
+						"source_ranges": {
+							"constant_value": [
+								"10.0.0.0/8",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"self_link": {
+								"description": "The URI of the created resource",
+								"expression": {
+									"references": [
+										"google_compute_firewall.firewall.self_link",
+										"google_compute_firewall.firewall",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "google_compute_firewall.firewall",
+								"expressions": {
+									"allow": [
+										{
+											"ports": {
+												"references": [
+													"var.ports",
+												],
+											},
+											"protocol": {
+												"references": [
+													"var.protocol",
+												],
+											},
+										},
+									],
+									"name": {
+										"references": [
+											"var.fw_name",
+										],
+									},
+									"network": {
+										"references": [
+											"var.network_self_link",
+										],
+									},
+									"project": {
+										"references": [
+											"var.project_id",
+										],
+									},
+									"source_ranges": {
+										"references": [
+											"var.source_ranges",
+										],
+									},
+									"source_tags": {
+										"references": [
+											"var.source_tags",
+										],
+									},
+									"target_tags": {
+										"references": [
+											"var.target_tags",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "firewall",
+								"provider_config_key": "firewall-allow-icmp:google",
+								"schema_version":      1,
+								"type":                "google_compute_firewall",
+							},
+						],
+						"variables": {
+							"fw_name": {
+								"description": "A unique name for the resource, required by GCE",
+							},
+							"network_self_link": {
+								"description": "The netwrok self link",
+							},
+							"ports": {
+								"default":     [],
+								"description": "List of ports and/or port ranges to allow. This can only be specified if the protocol is TCP or UDP",
+							},
+							"project_id": {
+								"description": " Enter project ID ",
+							},
+							"protocol": {
+								"description": "The name of the protocol to allow",
+							},
+							"source_ranges": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"source_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"target_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+						},
+					},
+					"source": "./modules/compute_firewall",
+				},
+				"firewall-allow-rdp": {
+					"expressions": {
+						"fw_name": {
+							"constant_value": "fw-allow-rdp-windows",
+						},
+						"network_self_link": {
+							"references": [
+								"module.network.self_link",
+								"module.network",
+							],
+						},
+						"ports": {
+							"constant_value": [
+								"3389",
+							],
+						},
+						"project_id": {
+							"references": [
+								"var.project_id",
+							],
+						},
+						"protocol": {
+							"constant_value": "tcp",
+						},
+						"source_ranges": {
+							"constant_value": [
+								"10.0.0.0/8",
+							],
+						},
+						"target_tags": {
+							"constant_value": [
+								"windows",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"self_link": {
+								"description": "The URI of the created resource",
+								"expression": {
+									"references": [
+										"google_compute_firewall.firewall.self_link",
+										"google_compute_firewall.firewall",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "google_compute_firewall.firewall",
+								"expressions": {
+									"allow": [
+										{
+											"ports": {
+												"references": [
+													"var.ports",
+												],
+											},
+											"protocol": {
+												"references": [
+													"var.protocol",
+												],
+											},
+										},
+									],
+									"name": {
+										"references": [
+											"var.fw_name",
+										],
+									},
+									"network": {
+										"references": [
+											"var.network_self_link",
+										],
+									},
+									"project": {
+										"references": [
+											"var.project_id",
+										],
+									},
+									"source_ranges": {
+										"references": [
+											"var.source_ranges",
+										],
+									},
+									"source_tags": {
+										"references": [
+											"var.source_tags",
+										],
+									},
+									"target_tags": {
+										"references": [
+											"var.target_tags",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "firewall",
+								"provider_config_key": "firewall-allow-rdp:google",
+								"schema_version":      1,
+								"type":                "google_compute_firewall",
+							},
+						],
+						"variables": {
+							"fw_name": {
+								"description": "A unique name for the resource, required by GCE",
+							},
+							"network_self_link": {
+								"description": "The netwrok self link",
+							},
+							"ports": {
+								"default":     [],
+								"description": "List of ports and/or port ranges to allow. This can only be specified if the protocol is TCP or UDP",
+							},
+							"project_id": {
+								"description": " Enter project ID ",
+							},
+							"protocol": {
+								"description": "The name of the protocol to allow",
+							},
+							"source_ranges": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"source_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"target_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+						},
+					},
+					"source": "./modules/compute_firewall",
+				},
+				"firewall-allow-ssh": {
+					"expressions": {
+						"fw_name": {
+							"constant_value": "fw-allow-ssh-linux",
+						},
+						"network_self_link": {
+							"references": [
+								"module.network.self_link",
+								"module.network",
+							],
+						},
+						"ports": {
+							"constant_value": [
+								"22",
+							],
+						},
+						"project_id": {
+							"references": [
+								"var.project_id",
+							],
+						},
+						"protocol": {
+							"constant_value": "tcp",
+						},
+						"source_ranges": {
+							"constant_value": [
+								"10.0.0.0/8",
+							],
+						},
+						"target_tags": {
+							"constant_value": [
+								"linux",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"self_link": {
+								"description": "The URI of the created resource",
+								"expression": {
+									"references": [
+										"google_compute_firewall.firewall.self_link",
+										"google_compute_firewall.firewall",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "google_compute_firewall.firewall",
+								"expressions": {
+									"allow": [
+										{
+											"ports": {
+												"references": [
+													"var.ports",
+												],
+											},
+											"protocol": {
+												"references": [
+													"var.protocol",
+												],
+											},
+										},
+									],
+									"name": {
+										"references": [
+											"var.fw_name",
+										],
+									},
+									"network": {
+										"references": [
+											"var.network_self_link",
+										],
+									},
+									"project": {
+										"references": [
+											"var.project_id",
+										],
+									},
+									"source_ranges": {
+										"references": [
+											"var.source_ranges",
+										],
+									},
+									"source_tags": {
+										"references": [
+											"var.source_tags",
+										],
+									},
+									"target_tags": {
+										"references": [
+											"var.target_tags",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "firewall",
+								"provider_config_key": "firewall-allow-ssh:google",
+								"schema_version":      1,
+								"type":                "google_compute_firewall",
+							},
+						],
+						"variables": {
+							"fw_name": {
+								"description": "A unique name for the resource, required by GCE",
+							},
+							"network_self_link": {
+								"description": "The netwrok self link",
+							},
+							"ports": {
+								"default":     [],
+								"description": "List of ports and/or port ranges to allow. This can only be specified if the protocol is TCP or UDP",
+							},
+							"project_id": {
+								"description": " Enter project ID ",
+							},
+							"protocol": {
+								"description": "The name of the protocol to allow",
+							},
+							"source_ranges": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"source_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+							"target_tags": {
+								"default":     [],
+								"description": "A list of source CIDR ranges that this firewall applies to. Can't be used for EGRESS",
+							},
+						},
+					},
+					"source": "./modules/compute_firewall",
+				},
+				"network": {
+					"expressions": {
+						"network_name": {
+							"references": [
+								"var.NetworkName",
+							],
+						},
+						"project_id": {
+							"references": [
+								"var.project_id",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"gateway_ipv4": {
+								"description": "The IPv4 address of the gateway",
+								"expression": {
+									"references": [
+										"google_compute_network.vpc.gateway_ipv4",
+										"google_compute_network.vpc",
+									],
+								},
+							},
+							"name": {
+								"description": "The unique name of the network",
+								"expression": {
+									"references": [
+										"google_compute_network.vpc.name",
+										"google_compute_network.vpc",
+									],
+								},
+							},
+							"self_link": {
+								"description": "The URL of the created resource",
+								"expression": {
+									"references": [
+										"google_compute_network.vpc.self_link",
+										"google_compute_network.vpc",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "google_compute_network.vpc",
+								"expressions": {
+									"auto_create_subnetworks": {
+										"references": [
+											"var.auto_create_subnetworks",
+										],
+									},
+									"name": {
+										"references": [
+											"var.network_name",
+										],
+									},
+									"project": {
+										"references": [
+											"var.project_id",
+										],
+									},
+									"routing_mode": {
+										"references": [
+											"var.routing_mode",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "vpc",
+								"provider_config_key": "network:google",
+								"schema_version":      0,
+								"type":                "google_compute_network",
+							},
+						],
+						"variables": {
+							"auto_create_subnetworks": {
+								"default":     "false",
+								"description": "Auto-creation of the associated subnet",
+							},
+							"network_name": {
+								"description": "Network name a create on GCP",
+							},
+							"project_id": {
+								"description": " Enter Project ID to create VPC",
+							},
+							"routing_mode": {
+								"default":     "REGIONAL",
+								"description": "Sets the network-wide routing mode for Cloud Routers to use. Accepted values are GLOBAL or REGIONAL. Defaults to REGIONAL",
+							},
+						},
+					},
+					"source": "./modules/compute_network",
+				},
+				"subnet_usw2": {
+					"expressions": {
+						"ip_cidr_range": {
+							"references": [
+								"var.IP_CIDR_Range_subnet_usw2",
+							],
+						},
+						"network_self_link": {
+							"references": [
+								"module.network.self_link",
+								"module.network",
+							],
+						},
+						"project_id": {
+							"references": [
+								"var.project_id",
+							],
+						},
+						"subnet_name": {
+							"references": [
+								"var.SubnetName_usw2",
+							],
+						},
+						"subnet_region": {
+							"references": [
+								"var.SubnetRegion_usw2",
+							],
+						},
+					},
+					"module": {
+						"outputs": {
+							"gateway_address": {
+								"description": "The IP address of the gateway.",
+								"expression": {
+									"references": [
+										"google_compute_subnetwork.subnet.gateway_address",
+										"google_compute_subnetwork.subnet",
+									],
+								},
+							},
+							"self_link": {
+								"description": "The URL of the created resource",
+								"expression": {
+									"references": [
+										"google_compute_subnetwork.subnet.self_link",
+										"google_compute_subnetwork.subnet",
+									],
+								},
+							},
+							"subnet_region": {
+								"expression": {
+									"references": [
+										"google_compute_subnetwork.subnet.region",
+										"google_compute_subnetwork.subnet",
+									],
+								},
+							},
+						},
+						"resources": [
+							{
+								"address": "google_compute_subnetwork.subnet",
+								"expressions": {
+									"ip_cidr_range": {
+										"references": [
+											"var.ip_cidr_range",
+										],
+									},
+									"log_config": [
+										{
+											"aggregation_interval": {
+												"constant_value": "INTERVAL_5_SEC",
+											},
+											"flow_sampling": {
+												"constant_value": 0.5,
+											},
+											"metadata": {
+												"constant_value": "INCLUDE_ALL_METADATA",
+											},
+										},
+									],
+									"name": {
+										"references": [
+											"var.subnet_name",
+										],
+									},
+									"network": {
+										"references": [
+											"var.network_self_link",
+										],
+									},
+									"private_ip_google_access": {
+										"constant_value": "true",
+									},
+									"project": {
+										"references": [
+											"var.project_id",
+										],
+									},
+									"region": {
+										"references": [
+											"var.subnet_region",
+										],
+									},
+								},
+								"mode":                "managed",
+								"name":                "subnet",
+								"provider_config_key": "subnet_usw2:google",
+								"schema_version":      0,
+								"type":                "google_compute_subnetwork",
+							},
+						],
+						"variables": {
+							"ip_cidr_range": {
+								"description": "IP range to book",
+							},
+							"network_self_link": {
+								"description": "network self link",
+							},
+							"project_id": {
+								"description": " Enter project ID ",
+							},
+							"subnet_name": {
+								"description": "Subnet name to create on GCP",
+							},
+							"subnet_region": {
+								"default":     "",
+								"description": "Zone associated with the subnet. This defaults to the region configured in the provider.",
+							},
+						},
+					},
+					"source": "./modules/compute_subnetwork",
+				},
+			},
+			"outputs": {
+				"fw-allow-icmp_self_link": {
+					"description": "The URI of the created resource",
+					"expression": {
+						"references": [
+							"module.firewall-allow-icmp.self_link",
+							"module.firewall-allow-icmp",
+						],
+					},
+				},
+				"fw-allow-rdp_self_link": {
+					"description": "The URI of the created resource",
+					"expression": {
+						"references": [
+							"module.firewall-allow-rdp.self_link",
+							"module.firewall-allow-rdp",
+						],
+					},
+				},
+				"fw-allow-ssh_self_link": {
+					"description": "The URI of the created resource",
+					"expression": {
+						"references": [
+							"module.firewall-allow-ssh.self_link",
+							"module.firewall-allow-ssh",
+						],
+					},
+				},
+				"network_name": {
+					"description": "The unique name of the network",
+					"expression": {
+						"references": [
+							"module.network.name",
+							"module.network",
+						],
+					},
+				},
+				"network_self_link": {
+					"description": "The URL of the created resource",
+					"expression": {
+						"references": [
+							"module.network.self_link",
+							"module.network",
+						],
+					},
+				},
+				"subnet_usw2_gateway_address": {
+					"description": "The IP address of the gateway.",
+					"expression": {
+						"references": [
+							"module.subnet_usw2.gateway_address",
+							"module.subnet_usw2",
+						],
+					},
+				},
+				"subnet_usw2_self_link": {
+					"description": "The URL of the created resource",
+					"expression": {
+						"references": [
+							"module.subnet_usw2.self_link",
+							"module.subnet_usw2",
+						],
+					},
+				},
+				"subnet_usw2_subnet_region": {
+					"expression": {
+						"references": [
+							"module.subnet_usw2.subnet_region",
+							"module.subnet_usw2",
+						],
+					},
+				},
+			},
+			"variables": {
+				"IP_CIDR_Range_subnet_usw2": {
+					"default": "10.10.8.0/24",
+				},
+				"NetworkName": {
+					"default": "vpc-shared-dev-01",
+				},
+				"SubnetName_usw2": {
+					"default": "sub-prv-usw2-01",
+				},
+				"SubnetRegion_usw2": {
+					"default": "us-west2",
+				},
+				"access_token": {
+					"sensitive": true,
+				},
+				"project_id": {
+					"sensitive": true,
+				},
+			},
+		},
+	},
+	"format_version": "0.2",
+	"output_changes": {
+		"fw-allow-icmp_self_link": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"fw-allow-rdp_self_link": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"fw-allow-ssh_self_link": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"network_name": {
+			"actions": [
+				"create",
+			],
+			"after":            "vpc-shared-dev-01",
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"network_self_link": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"subnet_usw2_gateway_address": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"subnet_usw2_self_link": {
+			"actions": [
+				"create",
+			],
+			"after_sensitive":  false,
+			"after_unknown":    true,
+			"before":           null,
+			"before_sensitive": false,
+		},
+		"subnet_usw2_subnet_region": {
+			"actions": [
+				"create",
+			],
+			"after":            "us-west2",
+			"after_sensitive":  false,
+			"after_unknown":    false,
+			"before":           null,
+			"before_sensitive": false,
+		},
+	},
+	"planned_values": {
+		"outputs": {
+			"fw-allow-icmp_self_link": {
+				"sensitive": false,
+			},
+			"fw-allow-rdp_self_link": {
+				"sensitive": false,
+			},
+			"fw-allow-ssh_self_link": {
+				"sensitive": false,
+			},
+			"network_name": {
+				"sensitive": false,
+				"value":     "vpc-shared-dev-01",
+			},
+			"network_self_link": {
+				"sensitive": false,
+			},
+			"subnet_usw2_gateway_address": {
+				"sensitive": false,
+			},
+			"subnet_usw2_self_link": {
+				"sensitive": false,
+			},
+			"subnet_usw2_subnet_region": {
+				"sensitive": false,
+				"value":     "us-west2",
+			},
+		},
+		"root_module": {
+			"child_modules": [
+				{
+					"address": "module.firewall-allow-icmp",
+					"resources": [
+						{
+							"address":        "module.firewall-allow-icmp.google_compute_firewall.firewall",
+							"mode":           "managed",
+							"name":           "firewall",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 1,
+							"sensitive_values": {
+								"allow": [
+									{
+										"ports": [],
+									},
+								],
+								"deny":               [],
+								"destination_ranges": [],
+								"project":            true,
+								"source_ranges": [
+									false,
+								],
+							},
+							"type": "google_compute_firewall",
+							"values": {
+								"allow": [
+									{
+										"ports":    [],
+										"protocol": "icmp",
+									},
+								],
+								"deny":           [],
+								"description":    null,
+								"disabled":       null,
+								"enable_logging": null,
+								"name":           "fw-allow-icmp",
+								"priority":       1000,
+								"project":        "REDACTED_SENSITIVE",
+								"source_ranges": [
+									"10.0.0.0/8",
+								],
+								"source_service_accounts": null,
+								"source_tags":             null,
+								"target_service_accounts": null,
+								"target_tags":             null,
+								"timeouts":                null,
+							},
+						},
+					],
+				},
+				{
+					"address": "module.firewall-allow-rdp",
+					"resources": [
+						{
+							"address":        "module.firewall-allow-rdp.google_compute_firewall.firewall",
+							"mode":           "managed",
+							"name":           "firewall",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 1,
+							"sensitive_values": {
+								"allow": [
+									{
+										"ports": [
+											false,
+										],
+									},
+								],
+								"deny":               [],
+								"destination_ranges": [],
+								"project":            true,
+								"source_ranges": [
+									false,
+								],
+								"target_tags": [
+									false,
+								],
+							},
+							"type": "google_compute_firewall",
+							"values": {
+								"allow": [
+									{
+										"ports": [
+											"3389",
+										],
+										"protocol": "tcp",
+									},
+								],
+								"deny":           [],
+								"description":    null,
+								"disabled":       null,
+								"enable_logging": null,
+								"name":           "fw-allow-rdp-windows",
+								"priority":       1000,
+								"project":        "REDACTED_SENSITIVE",
+								"source_ranges": [
+									"10.0.0.0/8",
+								],
+								"source_service_accounts": null,
+								"source_tags":             null,
+								"target_service_accounts": null,
+								"target_tags": [
+									"windows",
+								],
+								"timeouts": null,
+							},
+						},
+					],
+				},
+				{
+					"address": "module.firewall-allow-ssh",
+					"resources": [
+						{
+							"address":        "module.firewall-allow-ssh.google_compute_firewall.firewall",
+							"mode":           "managed",
+							"name":           "firewall",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 1,
+							"sensitive_values": {
+								"allow": [
+									{
+										"ports": [
+											false,
+										],
+									},
+								],
+								"deny":               [],
+								"destination_ranges": [],
+								"project":            true,
+								"source_ranges": [
+									false,
+								],
+								"target_tags": [
+									false,
+								],
+							},
+							"type": "google_compute_firewall",
+							"values": {
+								"allow": [
+									{
+										"ports": [
+											"22",
+										],
+										"protocol": "tcp",
+									},
+								],
+								"deny":           [],
+								"description":    null,
+								"disabled":       null,
+								"enable_logging": null,
+								"name":           "fw-allow-ssh-linux",
+								"priority":       1000,
+								"project":        "REDACTED_SENSITIVE",
+								"source_ranges": [
+									"10.0.0.0/8",
+								],
+								"source_service_accounts": null,
+								"source_tags":             null,
+								"target_service_accounts": null,
+								"target_tags": [
+									"linux",
+								],
+								"timeouts": null,
+							},
+						},
+					],
+				},
+				{
+					"address": "module.network",
+					"resources": [
+						{
+							"address":        "module.network.google_compute_network.vpc",
+							"mode":           "managed",
+							"name":           "vpc",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 0,
+							"sensitive_values": {
+								"project": true,
+							},
+							"type": "google_compute_network",
+							"values": {
+								"auto_create_subnetworks":         false,
+								"delete_default_routes_on_create": false,
+								"description":                     null,
+								"name":                            "vpc-shared-dev-01",
+								"project":                         "REDACTED_SENSITIVE",
+								"routing_mode":                    "REGIONAL",
+								"timeouts":                        null,
+							},
+						},
+					],
+				},
+				{
+					"address": "module.subnet_usw2",
+					"resources": [
+						{
+							"address":        "module.subnet_usw2.google_compute_subnetwork.subnet",
+							"mode":           "managed",
+							"name":           "subnet",
+							"provider_name":  "registry.terraform.io/hashicorp/google",
+							"schema_version": 0,
+							"sensitive_values": {
+								"log_config": [
+									{},
+								],
+								"project":            true,
+								"secondary_ip_range": [],
+							},
+							"type": "google_compute_subnetwork",
+							"values": {
+								"description":   null,
+								"ip_cidr_range": "10.10.8.0/24",
+								"log_config": [
+									{
+										"aggregation_interval": "INTERVAL_5_SEC",
+										"flow_sampling":        0.5,
+										"metadata":             "INCLUDE_ALL_METADATA",
+									},
+								],
+								"name": "sub-prv-usw2-01",
+								"private_ip_google_access": true,
+								"project":                  "REDACTED_SENSITIVE",
+								"region":                   "us-west2",
+								"timeouts":                 null,
+							},
+						},
+					],
+				},
+			],
+		},
+	},
+	"prior_state": {
+		"format_version":    "0.2",
+		"terraform_version": "1.0.7",
+		"values": {
+			"outputs": {
+				"network_name": {
+					"sensitive": false,
+					"value":     "vpc-shared-dev-01",
+				},
+				"subnet_usw2_subnet_region": {
+					"sensitive": false,
+					"value":     "us-west2",
+				},
+			},
+			"root_module": {},
+		},
+	},
+	"resource_changes": [
+		{
+			"address": "module.firewall-allow-icmp.google_compute_firewall.firewall",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"allow": [
+						{
+							"ports":    [],
+							"protocol": "icmp",
+						},
+					],
+					"deny":           [],
+					"description":    null,
+					"disabled":       null,
+					"enable_logging": null,
+					"name":           "fw-allow-icmp",
+					"priority":       1000,
+					"project":        "REDACTED_SENSITIVE",
+					"source_ranges": [
+						"10.0.0.0/8",
+					],
+					"source_service_accounts": null,
+					"source_tags":             null,
+					"target_service_accounts": null,
+					"target_tags":             null,
+					"timeouts":                null,
+				},
+				"after_sensitive": {
+					"allow": [
+						{
+							"ports": [],
+						},
+					],
+					"deny":               [],
+					"destination_ranges": [],
+					"project":            true,
+					"source_ranges": [
+						false,
+					],
+				},
+				"after_unknown": {
+					"allow": [
+						{
+							"ports": [],
+						},
+					],
+					"creation_timestamp": true,
+					"deny":               [],
+					"destination_ranges": true,
+					"direction":          true,
+					"id":                 true,
+					"network":            true,
+					"self_link":          true,
+					"source_ranges": [
+						false,
+					],
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-icmp",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_firewall",
+		},
+		{
+			"address": "module.firewall-allow-rdp.google_compute_firewall.firewall",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"allow": [
+						{
+							"ports": [
+								"3389",
+							],
+							"protocol": "tcp",
+						},
+					],
+					"deny":           [],
+					"description":    null,
+					"disabled":       null,
+					"enable_logging": null,
+					"name":           "fw-allow-rdp-windows",
+					"priority":       1000,
+					"project":        "REDACTED_SENSITIVE",
+					"source_ranges": [
+						"10.0.0.0/8",
+					],
+					"source_service_accounts": null,
+					"source_tags":             null,
+					"target_service_accounts": null,
+					"target_tags": [
+						"windows",
+					],
+					"timeouts": null,
+				},
+				"after_sensitive": {
+					"allow": [
+						{
+							"ports": [
+								false,
+							],
+						},
+					],
+					"deny":               [],
+					"destination_ranges": [],
+					"project":            true,
+					"source_ranges": [
+						false,
+					],
+					"target_tags": [
+						false,
+					],
+				},
+				"after_unknown": {
+					"allow": [
+						{
+							"ports": [
+								false,
+							],
+						},
+					],
+					"creation_timestamp": true,
+					"deny":               [],
+					"destination_ranges": true,
+					"direction":          true,
+					"id":                 true,
+					"network":            true,
+					"self_link":          true,
+					"source_ranges": [
+						false,
+					],
+					"target_tags": [
+						false,
+					],
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-rdp",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_firewall",
+		},
+		{
+			"address": "module.firewall-allow-ssh.google_compute_firewall.firewall",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"allow": [
+						{
+							"ports": [
+								"22",
+							],
+							"protocol": "tcp",
+						},
+					],
+					"deny":           [],
+					"description":    null,
+					"disabled":       null,
+					"enable_logging": null,
+					"name":           "fw-allow-ssh-linux",
+					"priority":       1000,
+					"project":        "REDACTED_SENSITIVE",
+					"source_ranges": [
+						"10.0.0.0/8",
+					],
+					"source_service_accounts": null,
+					"source_tags":             null,
+					"target_service_accounts": null,
+					"target_tags": [
+						"linux",
+					],
+					"timeouts": null,
+				},
+				"after_sensitive": {
+					"allow": [
+						{
+							"ports": [
+								false,
+							],
+						},
+					],
+					"deny":               [],
+					"destination_ranges": [],
+					"project":            true,
+					"source_ranges": [
+						false,
+					],
+					"target_tags": [
+						false,
+					],
+				},
+				"after_unknown": {
+					"allow": [
+						{
+							"ports": [
+								false,
+							],
+						},
+					],
+					"creation_timestamp": true,
+					"deny":               [],
+					"destination_ranges": true,
+					"direction":          true,
+					"id":                 true,
+					"network":            true,
+					"self_link":          true,
+					"source_ranges": [
+						false,
+					],
+					"target_tags": [
+						false,
+					],
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"mode":           "managed",
+			"module_address": "module.firewall-allow-ssh",
+			"name":           "firewall",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_firewall",
+		},
+		{
+			"address": "module.network.google_compute_network.vpc",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"auto_create_subnetworks":         false,
+					"delete_default_routes_on_create": false,
+					"description":                     null,
+					"name":                            "vpc-shared-dev-01",
+					"project":                         "REDACTED_SENSITIVE",
+					"routing_mode":                    "REGIONAL",
+					"timeouts":                        null,
+				},
+				"after_sensitive": {
+					"project": true,
+				},
+				"after_unknown": {
+					"gateway_ipv4": true,
+					"id":           true,
+					"ipv4_range":   true,
+					"self_link":    true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"mode":           "managed",
+			"module_address": "module.network",
+			"name":           "vpc",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_network",
+		},
+		{
+			"address": "module.subnet_usw2.google_compute_subnetwork.subnet",
+			"change": {
+				"actions": [
+					"create",
+				],
+				"after": {
+					"description":   null,
+					"ip_cidr_range": "10.10.8.0/24",
+					"log_config": [
+						{
+							"aggregation_interval": "INTERVAL_5_SEC",
+							"flow_sampling":        0.5,
+							"metadata":             "INCLUDE_ALL_METADATA",
+						},
+					],
+					"name": "sub-prv-usw2-01",
+					"private_ip_google_access": true,
+					"project":                  "REDACTED_SENSITIVE",
+					"region":                   "us-west2",
+					"timeouts":                 null,
+				},
+				"after_sensitive": {
+					"log_config": [
+						{},
+					],
+					"project":            true,
+					"secondary_ip_range": [],
+				},
+				"after_unknown": {
+					"creation_timestamp": true,
+					"enable_flow_logs":   true,
+					"fingerprint":        true,
+					"gateway_address":    true,
+					"id":                 true,
+					"log_config": [
+						{},
+					],
+					"network":            true,
+					"secondary_ip_range": true,
+					"self_link":          true,
+				},
+				"before":           null,
+				"before_sensitive": false,
+			},
+			"mode":           "managed",
+			"module_address": "module.subnet_usw2",
+			"name":           "subnet",
+			"provider_name":  "registry.terraform.io/hashicorp/google",
+			"type":           "google_compute_subnetwork",
+		},
+	],
+	"terraform_version": "1.0.7",
+	"variables": {
+		"IP_CIDR_Range_subnet_usw2": {
+			"value": "10.10.8.0/24",
+		},
+		"NetworkName": {
+			"value": "vpc-shared-dev-01",
+		},
+		"SubnetName_usw2": {
+			"value": "sub-prv-usw2-01",
+		},
+		"SubnetRegion_usw2": {
+			"value": "us-west2",
+		},
+		"access_token": {
+			"value": "REDACTED_SENSITIVE",
+		},
+		"project_id": {
+			"value": "REDACTED_SENSITIVE",
+		},
+	},
+}
