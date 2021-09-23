@@ -1,19 +1,78 @@
 
 import "tfplan/v2" as tfplan
+import "tfplan-functions" as plan
 
-gcp_subnets = filter tfplan.resource_changes as _, rc {
-    rc.type is "google_compute_firewall" and
-        (rc.change.actions contains "create" or rc.change.actions is ["update"])
-}
+# Forbidden CIDRs
+forbidden_cidrs = ["0.0.0.0/0"]
 
-disallowed_cidr_block = "0.0.0.0/0"
+# Get all Firewalls
+allFirewalls = plan.find_resources("google_compute_firewall")
 
-block_allow_all = rule {
-	all get_resources("google_compute_firewall") as fw {
-		disallowed_cidr_block not in fw.applied.source_ranges[0]
-	}
-}
+ingressFirewalls = plan.filter_attribute_is_value(allFirewalls,
+	"firewall-allow-icmp", "firewall-allow-ssh", "firewall-allow-rdp", false).resources
 
+# Filter to ingress firewalls with forbidden source_ranges
+# Warnings will be printed for all violations since the last parameter is true
+violatingFirewalls = plan.filter_attribute_contains_items_from_list(
+	ingressFirewalls, "source_ranges", forbidden_cidrs, true)
+
+# Count violations
+violations = length(violatingFirewalls["messages"])
+
+# Main rule
 main = rule {
-	(block_allow_all) else true
+	violations is 0
 }
+#
+#gcp_subnets = filter tfplan.resource_changes as _, rc {
+#    rc.type is "google_compute_firewall" and
+#        (rc.change.actions contains "create" or rc.change.actions is ["update"])
+#}
+#
+#
+## Get an array of all resources of the given type (or an empty array).
+#get_resources = func(type) {
+# if length(tfplan.module_paths else []) > 0 { # always true in the real tfplan import
+#  return get_resources_all_modules(type)
+# } else { # fallback for tests
+#  return get_resources_root_only(type)
+# }
+#}
+#
+#get_resources_root_only = func(type) {
+# resources = []
+# named_and_counted_resources = tfplan.resources[type] else {}
+# for named_and_counted_resources as _, instances {
+#  for instances as _, body {
+#   append(resources, body)
+#  }
+# }
+# return resources
+#}
+#
+#
+#
+#get_resources_all_modules = func(type) {
+# resources = []
+# for tfplan.module_paths as path {
+#  named_and_counted_resources = tfplan.module(path).resources[type] else {}
+#  for named_and_counted_resources as _, instances {
+#   for instances as _, body {
+#    append(resources, body)
+#   }
+#  }
+# }
+# return resources
+#}
+#
+#disallowed_cidr_block = "0.0.0.0/0"
+#
+#block_allow_all = rule {
+# all get_resources("google_compute_firewall") as fw {
+#  disallowed_cidr_block not in fw.applied.source_ranges[0]
+# }
+#}
+#
+#main = rule {
+# (block_allow_all) else true
+#}
